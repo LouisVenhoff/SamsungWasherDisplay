@@ -1,0 +1,16 @@
+{
+  "name": "washer_display",
+  "version": "1.0.0",
+  "description": "Connector between Samsung Smart Things Washer and LED fun screen matrix display from action",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npx tsc && node dist/index.js",
+    "build": "npx tsc index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Louis Venhoff",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.9.3"
+  }
+}
