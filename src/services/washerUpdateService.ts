@@ -1,18 +1,22 @@
+import { SamsungWasherApi } from "../api/samsungApi";
+import { IWasherApi } from "../interfaces/IWasherApi";
 import {Service} from "./service";
 
 export class WasherUpdateService extends Service{
     
+    private washerApi:IWasherApi;
+    
 
-    private samsungAuthToken:string;
-
-    constructor(samsungAuthToken:string){
+    constructor(washerApi:IWasherApi){
         super("* * * * * *");
 
-        this.samsungAuthToken = samsungAuthToken;
+        this.washerApi = washerApi;
     }
 
-    doWork(): void | Promise<void> {
-        console.log(this.samsungAuthToken);
+    async doWork(): Promise<void> {
+        let data: string = await this.washerApi.updateState();
+
+        console.log(JSON.parse(data));
     }
 
     
