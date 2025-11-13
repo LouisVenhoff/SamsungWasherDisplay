@@ -1,4 +1,5 @@
 import { SamsungWasherApi } from "../api/samsungApi";
+import { WashingDataDto } from "../dto/washingDataDto";
 import { IWasherApi } from "../interfaces/IWasherApi";
 import {Service} from "./service";
 
@@ -14,9 +15,9 @@ export class WasherUpdateService extends Service{
     }
 
     async doWork(): Promise<void> {
-        let data: string = await this.washerApi.updateState();
+        let data: WashingDataDto = await this.washerApi.updateState();
 
-        console.log(JSON.parse(data));
+        console.log(data);
     }
 
     

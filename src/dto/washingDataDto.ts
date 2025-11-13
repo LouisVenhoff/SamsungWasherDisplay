@@ -1,4 +1,7 @@
 export type WashingDataDto = {
-    program: string,
-    temp: number,
+    temp:string,
+    remaining: string,
+    progress: string,
+    phase: string,
+    state: string 
 }

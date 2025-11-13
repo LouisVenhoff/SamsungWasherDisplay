@@ -3,12 +3,17 @@ import { IDataMapper } from "../interfaces/IDataMapper";
 
 export class SamsungApiMapper implements IDataMapper{
     
-    generateWashingDataDTO(input: string): WashingDataDto {
-        const parsedJson = JSON.parse(input);
+    generateWashingDataDTO(input: any): WashingDataDto {
+        
+        const operatingState = input["samsungce.washerOperatingState"];
+        const temp = input["custom.washerWaterTemperature"].washerWaterTemperature.value;
+        const remaining = operatingState.remainingTimeStr.value;
+        const progress = operatingState.progress.value;
+        const phase = operatingState.washerJobPhase.value;
+        const state = input.washerOperatingState.machineState.value;
 
-        const temp = parsedJson.main.washerWaterTemperature;
-
-        return {temp: temp, program: "Test"}
+    
+        return {temp, remaining, progress, phase, state};
     }
     
 }
