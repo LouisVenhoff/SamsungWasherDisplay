@@ -1,8 +1,9 @@
 //var amqp = require("amqplib/callback_api");
 import amqplib, { Channel, ChannelModel } from 'amqplib';
+import { IMessageBroker } from '../../interfaces/IMessageBroker';
 
 
-export class Rabbit{
+export class Rabbit implements IMessageBroker{
 
     private queue: string;
     
@@ -17,30 +18,36 @@ export class Rabbit{
     }
 
 
-    private get isConnected():boolean{
+    public get isConnected():boolean{
         return this.connected;
     }
 
 
-    public async connect(){
-        const queue:string = "washerStates";
-
+    public async connect():Promise<boolean>{
         this.connection = await amqplib.connect("amqp://localhost");
 
         this.channel = await this.connection.createChannel();
         
-        if(!this.connection || !this.channel) return;
+        if(!this.connection || !this.channel) return false;
 
         //this.channel.assertQueue(this.queue);
 
         this.connected = true;
+
+        console.log("Connected to RabbitMQ Broker!")
+        return true;
+
     }
 
-    public async publish(){
-        
-        if(!this.connected) return;
+    public async publish(payload: any):Promise<boolean>{
+        console.log(this.connected);
+        if(!this.connected) return false;
 
-        this.channel!.sendToQueue(this.queue, Buffer.from("Hello World!"));
+        this.channel!.sendToQueue(this.queue, Buffer.from(payload));
+
+        console.log("Published!");
+
+        return true;
     }
 
 
