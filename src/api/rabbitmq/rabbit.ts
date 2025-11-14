@@ -24,11 +24,22 @@ export class Rabbit implements IMessageBroker{
 
 
     public async connect():Promise<boolean>{
-        this.connection = await amqplib.connect("amqp://localhost");
-
-        this.channel = await this.connection.createChannel();
         
-        if(!this.connection || !this.channel) return false;
+        try{
+            this.connection = await amqplib.connect("amqp://localhost");
+
+            this.channel = await this.connection.createChannel();
+        
+            if(!this.connection || !this.channel) return false;
+        }
+        catch(err:any){
+            
+            console.log("Error while connecting to RabbitMQ Broker", err);
+
+            return false;
+        }
+
+        
 
         //this.channel.assertQueue(this.queue);
 
@@ -40,12 +51,15 @@ export class Rabbit implements IMessageBroker{
     }
 
     public async publish(payload: any):Promise<boolean>{
-        console.log(this.connected);
         if(!this.connected) return false;
 
-        this.channel!.sendToQueue(this.queue, Buffer.from(payload));
-
-        console.log("Published!");
+        try{
+            this.channel!.sendToQueue(this.queue, Buffer.from(payload));
+        }
+        catch(err: any){
+            console.log("Error while publishing payload!", err);
+            return false;
+        }
 
         return true;
     }
