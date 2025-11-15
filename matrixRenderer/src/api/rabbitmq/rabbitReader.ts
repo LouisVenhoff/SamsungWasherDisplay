@@ -44,6 +44,8 @@ export class RabbitReader<T> implements IMessageBrokerReader<T> {
         catch(err: any){
             console.log(`Error while subscribing: ${err}`);
         }
+
+        return false;
     }
 
 
