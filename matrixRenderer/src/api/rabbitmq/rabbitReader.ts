@@ -33,9 +33,10 @@ export class RabbitReader<T> implements IMessageBrokerReader<T> {
         try{
             this.channel!.consume(queue, (msg: ConsumeMessage | null) => {
                 if(!msg) return;
-    
+                
+                this.channel!.ack(msg)
+                
                 const parsedData:T = JSON.parse(msg.content.toString());
-    
                 onMessageHandler(parsedData);
     
                 return true
