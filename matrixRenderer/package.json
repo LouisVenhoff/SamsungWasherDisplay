@@ -1,0 +1,11 @@
+{
+  "name": "matrixrenderer",
+  "version": "1.0.0",
+  "description": "Receives washer information via RabbitMQ and renders them to an Action Matrix display",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Louis Venhoff",
+  "license": "ISC"
+}
