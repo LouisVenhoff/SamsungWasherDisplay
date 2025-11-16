@@ -13,6 +13,9 @@
   "dependencies": {
     "amqplib": "^0.10.9",
     "canvas": "^3.2.0",
+    "hex-to-rgb": "^1.0.1",
+    "i": "^0.3.7",
+    "npm": "^11.6.2",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
