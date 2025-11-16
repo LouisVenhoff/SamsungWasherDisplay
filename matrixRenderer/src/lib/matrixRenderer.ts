@@ -1,3 +1,5 @@
+import { Canvas, createCanvas } from "canvas";
+
 const font = require("../../assets/font.json");
 
 export class MatrixRenderer {
@@ -18,10 +20,23 @@ export class MatrixRenderer {
 
         this.iconSpaceInPx = this.displayWidth - this.textSpaceInPx;
 
-        let test: number = 13;
+        //this.convertHexCharToBinaryMatrixChar(font["COLON"]);
 
-        this.convertHexCharToBinaryMatrixChar(font["2"]);
+        this.convertWord("W");
+    }
 
+    private convertWord(word: string){
+        
+        const upperedWord: string = word.toUpperCase();
+
+        Array.from(upperedWord).forEach((char: string) => {
+            this.convertHexCharToBinaryMatrixChar(font[char.toUpperCase()]);
+        });
+
+    }
+
+    private renderWordOnCanvas(){
+        const canvas: Canvas = createCanvas(this.textSpaceInPx, this.displayHeight);
     }
 
 
