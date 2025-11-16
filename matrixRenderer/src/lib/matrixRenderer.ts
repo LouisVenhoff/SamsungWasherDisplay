@@ -20,7 +20,7 @@ export class MatrixRenderer {
 
         let test: number = 13;
 
-        this.convertHexCharToBinaryMatrixChar(font["C"]);
+        this.convertHexCharToBinaryMatrixChar(font["2"]);
 
     }
 
