@@ -1,7 +1,8 @@
-export function convertHexCharToBinaryMatrixChar(hexChar: string[]){
-    hexChar.forEach((char: string) => {
-        console.log(convertHexToBinaryString(char));
-    });
+export function convertHexCharToBinaryMatrixChar(hexChar: string[]): string[]{
+
+    return hexChar.map((char) => {
+        return convertHexToBinaryString(char);
+    })
 }
 
 function convertHexToBinaryString(hexString: string): string{

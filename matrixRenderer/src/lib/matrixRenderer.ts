@@ -5,6 +5,13 @@ const hexToRgb = require("hex-to-rgb");
 
 const font = require("../../assets/font.json");
 
+type Pixel = {
+    x: number,
+    y: number,
+    color: string;
+}
+
+
 export class MatrixRenderer {
 
     private displayWidth: number;
@@ -27,7 +34,7 @@ export class MatrixRenderer {
 
         this.convertWord("W");
         
-        this.renderWordOnCanvas();
+        this.renderCharOnCanvas();
     }
 
     private convertWord(word: string){
@@ -35,11 +42,17 @@ export class MatrixRenderer {
         const upperedWord: string = word.toUpperCase();
 
         Array.from(upperedWord).forEach((char: string) => {
-            convertHexCharToBinaryMatrixChar(font[char.toUpperCase()]);
+            convertHexCharToBinaryMatrixChar(font[char]);
         });
     }
 
-    private renderWordOnCanvas(){
+    private convertSingleChar(char: string, color: string){
+        const binaryChar:string[] = convertHexCharToBinaryMatrixChar(font[char]);
+
+        
+    }
+
+    private renderCharOnCanvas(){
         const canvas: Canvas = createCanvas(this.textSpaceInPx, this.displayHeight);
 
         const context = canvas.getContext("2d");
