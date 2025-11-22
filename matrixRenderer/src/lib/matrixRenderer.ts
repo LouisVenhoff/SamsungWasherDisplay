@@ -32,7 +32,7 @@ export class MatrixRenderer {
 
         //this.convertHexCharToBinaryMatrixChar(font["COLON"]);
 
-        this.convertWord("W");
+        this.convertWord("Test");
         
         this.renderCharOnCanvas();
     }
@@ -41,15 +41,33 @@ export class MatrixRenderer {
         
         const upperedWord: string = word.toUpperCase();
 
+        let wordArray:string[][] = [];
+
         Array.from(upperedWord).forEach((char: string) => {
-            convertHexCharToBinaryMatrixChar(font[char]);
+            wordArray.push(convertHexCharToBinaryMatrixChar(font[char]));
         });
+
+        
+
     }
 
     private convertSingleChar(char: string, color: string){
         const binaryChar:string[] = convertHexCharToBinaryMatrixChar(font[char]);
 
         
+    }
+
+
+    private summarizeCharArray(wordArr:string[][]){
+
+        let result: string[] = [];
+
+        for(let i = 0; i < wordArr.length; i++){
+            for(let j = 0; j < wordArr[i]!.length; j++){
+                
+            }
+        }
+
     }
 
     private renderCharOnCanvas(){
