@@ -32,7 +32,9 @@ export class MatrixRenderer {
 
         //this.convertHexCharToBinaryMatrixChar(font["COLON"]);
 
-        this.convertWord("Test");
+        //this.convertWord("Test");
+
+        this.convertSingleChar("T", "#fefefe");
         
         this.renderCharOnCanvas();
     }
@@ -47,6 +49,9 @@ export class MatrixRenderer {
             wordArray.push(convertHexCharToBinaryMatrixChar(font[char]));
         });
 
+        console.log(this.summarizeCharArray(wordArray));
+        return wordArray;
+
         
 
     }
@@ -54,19 +59,26 @@ export class MatrixRenderer {
     private convertSingleChar(char: string, color: string){
         const binaryChar:string[] = convertHexCharToBinaryMatrixChar(font[char]);
 
+        for(let i = 0; i < binaryChar.length; i++){
+           for(let j = 0; j < binaryChar[i]!.length; j++){
+            console.log("Test", binaryChar[i]![j]!)
+           }
+        }
         
     }
 
 
     private summarizeCharArray(wordArr:string[][]){
 
-        let result: string[] = [];
+        let result: string[] = new Array<string>(14).fill("");
 
         for(let i = 0; i < wordArr.length; i++){
             for(let j = 0; j < wordArr[i]!.length; j++){
-                
+                result[j] += wordArr[i]![j]!
             }
         }
+
+        console.log(result);
 
     }
 
