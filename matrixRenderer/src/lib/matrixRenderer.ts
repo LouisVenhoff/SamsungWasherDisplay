@@ -1,15 +1,10 @@
 import { Canvas, createCanvas } from "canvas";
 import { convertHexCharToBinaryMatrixChar } from "../helpers/fontParser";
 import fs from "fs";
+import Pixel from "../classes/pixel";
 const hexToRgb = require("hex-to-rgb");
 
 const font = require("../../assets/font.json");
-
-type Pixel = {
-    x: number,
-    y: number,
-    color: string;
-}
 
 
 export class MatrixRenderer {
@@ -34,7 +29,7 @@ export class MatrixRenderer {
 
         //this.convertWord("Test");
 
-        this.convertSingleChar("T", "#fefefe");
+        this.convertSingleChar("T", "#3b4523");
         
         this.renderCharOnCanvas();
     }
@@ -56,14 +51,28 @@ export class MatrixRenderer {
 
     }
 
-    private convertSingleChar(char: string, color: string){
+    private convertSingleChar(char: string, color: string):Pixel[][]{
         const binaryChar:string[] = convertHexCharToBinaryMatrixChar(font[char]);
 
+        let colorized: Pixel[][] = [];
+        
         for(let i = 0; i < binaryChar.length; i++){
-           for(let j = 0; j < binaryChar[i]!.length; j++){
-            console.log("Test", binaryChar[i]![j]!)
-           }
+           
+            let tempArr:Pixel[] = [];
+           
+            for(let j = 0; j < binaryChar[i]!.length; j++){
+                if(binaryChar[i]![j]! === "1"){
+                    tempArr.push(new Pixel(color));
+                }
+                else{
+                    tempArr.push(new Pixel("#000000"));
+                }
+            }
+
+            colorized.push(tempArr);
         }
+
+        return colorized;
         
     }
 
