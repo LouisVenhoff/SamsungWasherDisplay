@@ -31,29 +31,26 @@ export class MatrixRenderer {
 
         //this.convertSingleChar("T", "#3b4523");
         
-        this.convertWord("Test")
+        let pixels: Pixel[][] = this.convertWord("12:23")
 
-        this.renderCharOnCanvas();
+        this.renderCharOnCanvas(pixels);
     }
 
-    private convertWord(word: string){
+    private convertWord(word: string): Pixel[][] {
         
         const upperedWord: string = word.toUpperCase();
 
         let wordArray:Pixel[][][] = [];
 
         Array.from(upperedWord).forEach((char: string) => {
-            wordArray.push(this.convertSingleChar(char, "#343423"));
+            wordArray.push(this.convertSingleChar(char, "#ff0000"));
         });
 
         
         let summarizedWord:Pixel[][] = this.summarizeCharArray(wordArray);
 
 
-        console.log(summarizedWord[0]!.length);
-        return wordArray;
-
-        
+        return summarizedWord;
 
     }
 
@@ -100,7 +97,7 @@ export class MatrixRenderer {
 
     }
 
-    private renderCharOnCanvas(){
+    private renderCharOnCanvas(imageData: Pixel[][]){
         const canvas: Canvas = createCanvas(this.textSpaceInPx, this.displayHeight);
 
         const context = canvas.getContext("2d");
@@ -109,7 +106,13 @@ export class MatrixRenderer {
 
         let data: Uint8ClampedArray = canvasData.data;
 
-        data = this.setPixel(data, 4, 4, "#675423");
+        for(let i = 0; i < imageData.length; i++){
+            for(let j = 0; j < imageData[i]!.length; j++){
+                data = this.setPixel(data,  j, i, imageData[i]![j]!.hexColor);
+            }
+        }
+
+        //data = this.setPixel(data, 4, 4, "#675423");
 
         context.putImageData(canvasData, 0, 0);
 

@@ -20,6 +20,10 @@ export default class Pixel{
     
     }
 
+    get hexColor() :string{
+        return this.hexValue;
+    }
+
     toRgbArray():number[]{
         return [this.r, this.g, this.b];
     }
