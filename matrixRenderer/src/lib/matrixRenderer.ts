@@ -29,8 +29,10 @@ export class MatrixRenderer {
 
         //this.convertWord("Test");
 
-        this.convertSingleChar("T", "#3b4523");
+        //this.convertSingleChar("T", "#3b4523");
         
+        this.convertWord("T")
+
         this.renderCharOnCanvas();
     }
 
@@ -38,13 +40,14 @@ export class MatrixRenderer {
         
         const upperedWord: string = word.toUpperCase();
 
-        let wordArray:string[][] = [];
+        let wordArray:Pixel[][][] = [];
 
         Array.from(upperedWord).forEach((char: string) => {
-            wordArray.push(convertHexCharToBinaryMatrixChar(font[char]));
+            wordArray.push(this.convertSingleChar(char, "#343423"));
         });
 
-        console.log(this.summarizeCharArray(wordArray));
+        console.log(wordArray);
+        //console.log(this.summarizeCharArray(wordArray));
         return wordArray;
 
         
@@ -77,13 +80,15 @@ export class MatrixRenderer {
     }
 
 
-    private summarizeCharArray(wordArr:string[][]){
+    private summarizeCharArray(wordArr:Pixel[][][]){
 
-        let result: string[] = new Array<string>(14).fill("");
+        let result: Pixel[][] = new Array<Pixel[]>(14);
 
         for(let i = 0; i < wordArr.length; i++){
             for(let j = 0; j < wordArr[i]!.length; j++){
-                result[j] += wordArr[i]![j]!
+                for(let k = 0; k < wordArr[i]![j]!.length; k++){
+                    //console.log(wordArr[i]![j]![k]!);
+                }
             }
         }
 
