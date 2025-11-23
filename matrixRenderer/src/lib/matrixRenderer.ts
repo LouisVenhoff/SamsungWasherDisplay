@@ -31,7 +31,7 @@ export class MatrixRenderer {
 
         //this.convertSingleChar("T", "#3b4523");
         
-        this.convertWord("T")
+        this.convertWord("Test")
 
         this.renderCharOnCanvas();
     }
@@ -46,8 +46,11 @@ export class MatrixRenderer {
             wordArray.push(this.convertSingleChar(char, "#343423"));
         });
 
-        //console.log(wordArray);
-        this.summarizeCharArray(wordArray);
+        
+        let summarizedWord:Pixel[][] = this.summarizeCharArray(wordArray);
+
+
+        console.log(summarizedWord[0]!.length);
         return wordArray;
 
         
@@ -56,6 +59,8 @@ export class MatrixRenderer {
 
     private convertSingleChar(char: string, color: string):Pixel[][]{
         const binaryChar:string[] = convertHexCharToBinaryMatrixChar(font[char]);
+
+        console.log(binaryChar);
 
         let colorized: Pixel[][] = [];
         
@@ -71,7 +76,6 @@ export class MatrixRenderer {
                     tempArr.push(new Pixel("#000000"));
                 }
             }
-
             colorized.push(tempArr);
         }
 
@@ -82,7 +86,7 @@ export class MatrixRenderer {
 
     private summarizeCharArray(wordArr:Pixel[][][]):Pixel[][]{
 
-        let result: Pixel[][] = new Array<Pixel[]>(14).fill([]);
+        let result: Pixel[][] = Array.from({ length: 14 }, () => []);
 
         for(let i = 0; i < wordArr.length; i++){
             for(let j = 0; j < wordArr[i]!.length; j++){
