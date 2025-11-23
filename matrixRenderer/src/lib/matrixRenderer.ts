@@ -46,8 +46,8 @@ export class MatrixRenderer {
             wordArray.push(this.convertSingleChar(char, "#343423"));
         });
 
-        console.log(wordArray);
-        //console.log(this.summarizeCharArray(wordArray));
+        //console.log(wordArray);
+        this.summarizeCharArray(wordArray);
         return wordArray;
 
         
@@ -80,19 +80,19 @@ export class MatrixRenderer {
     }
 
 
-    private summarizeCharArray(wordArr:Pixel[][][]){
+    private summarizeCharArray(wordArr:Pixel[][][]):Pixel[][]{
 
-        let result: Pixel[][] = new Array<Pixel[]>(14);
+        let result: Pixel[][] = new Array<Pixel[]>(14).fill([]);
 
         for(let i = 0; i < wordArr.length; i++){
             for(let j = 0; j < wordArr[i]!.length; j++){
                 for(let k = 0; k < wordArr[i]![j]!.length; k++){
-                    //console.log(wordArr[i]![j]![k]!);
+                    result[j]!.push(wordArr[i]![j]![k]!)
                 }
             }
         }
 
-        console.log(result);
+        return result;
 
     }
 
