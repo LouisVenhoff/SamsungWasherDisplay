@@ -85,7 +85,7 @@ export class MatrixRenderer {
 
     private summarizeCharArray(wordArr:Pixel[][][]):Pixel[][]{
 
-        let result: Pixel[][] = Array.from({ length: 14 }, () => []);
+        let result: Pixel[][] = Array.from({ length: 16 }, () => []);
 
         for(let i = 0; i < wordArr.length; i++){
             for(let j = 0; j < wordArr[i]!.length; j++){
