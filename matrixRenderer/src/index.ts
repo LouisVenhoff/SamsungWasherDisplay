@@ -11,7 +11,7 @@ async function main(){
 
     // await rabbit.subscribe("washerStates", (data: WashingDataDto) => {console.log(data.temp)});
 
-    const renderer:MatrixRenderer = new MatrixRenderer(64, 16, 75);
+    const renderer:MatrixRenderer = new MatrixRenderer(64, 16, 100);
 
 }
 
