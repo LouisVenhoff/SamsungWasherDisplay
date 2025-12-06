@@ -31,7 +31,7 @@ export class MatrixRenderer {
 
         //this.convertSingleChar("T", "#3b4523");
         
-        let pixels: Pixel[][] = this.convertWord("Hallo")
+        let pixels: Pixel[][] = this.convertWord("23:33")
 
         this.renderCharOnCanvas(pixels);
     }
@@ -87,6 +87,8 @@ export class MatrixRenderer {
 
         let result: Pixel[][] = Array.from({ length: 16 }, () => []);
 
+        console.log("Res:", result);
+
         for(let i = 0; i < wordArr.length; i++){
             for(let j = 0; j < wordArr[i]!.length; j++){
                 for(let k = 0; k < wordArr[i]![j]!.length; k++){
@@ -94,6 +96,8 @@ export class MatrixRenderer {
                 }
             }
         }
+
+        console.log("Result after", result);
 
         return result;
 
@@ -139,6 +143,16 @@ export class MatrixRenderer {
         canvasData[index + 3] = 255;
 
         return canvasData;
+    }
+
+    private defineBlackPixels(bitmap: Pixel[][]){
+
+        return bitmap.map((line) => {
+            while(line.length < 16){
+                line.push(new Pixel("#000000"));
+            }
+        });
+
     }
 
 
