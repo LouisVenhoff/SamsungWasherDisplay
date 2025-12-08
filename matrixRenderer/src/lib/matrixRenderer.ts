@@ -97,9 +97,7 @@ export class MatrixRenderer {
             }
         }
 
-        console.log("Result after", result);
-
-        return result;
+        return this.defineBlackPixels(result);
 
     }
 
@@ -145,13 +143,15 @@ export class MatrixRenderer {
         return canvasData;
     }
 
-    private defineBlackPixels(bitmap: Pixel[][]){
+    private defineBlackPixels(bitmap: Pixel[][]):Pixel[][]{
 
-        return bitmap.map((line) => {
-            while(line.length < 16){
+        bitmap.forEach((line:Pixel[]) => {
+            while(line.length < 64){
                 line.push(new Pixel("#000000"));
             }
         });
+
+        return bitmap;
 
     }
 
