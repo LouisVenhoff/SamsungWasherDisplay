@@ -1,10 +1,13 @@
 import WebsocketApi from "../api/websocket/websocketApi";
 import { PixelCommandDto } from "../dto/pixelCommandDto";
 import { WashingDataDto } from "../dto/washingDataDto";
+import WasherStateMachine from "./washerStateMachine";
 
 export default class Display {
 
     private api: WebsocketApi;
+
+    private displayInterval:NodeJS.Timeout | null = null;
 
     constructor(api: WebsocketApi){
         this.api = api;
@@ -16,16 +19,26 @@ export default class Display {
 
     public showWashingState(data: WashingDataDto){
         
-        const payload:PixelCommandDto = {
-            command: "send_text",
-            params: [
-                `text=${data.remaining} Grad`,
-                `animation=0`,
-                `speed=1`
-            ]
+        if(this.displayInterval){
+            clearInterval(this.displayInterval);
+            this.displayInterval = null;
         }
+        
+        const washerState:WasherStateMachine = new WasherStateMachine(data);
 
-        this.api.send(payload);
+        this.displayInterval = setInterval(() => {
+            const payload:PixelCommandDto = {
+                command: "send_text",
+                params: [
+                    `text=${washerState.next()}`,
+                    `animation=0`,
+                    `speed=1`
+                ]
+            }
+    
+            this.api.send(payload);
+        }, 8000);
+
     }
 
 
